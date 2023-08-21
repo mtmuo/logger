@@ -1,4 +1,4 @@
-module github.com/mtmuo/logger
+module github.com/shuiziliu7788/logger
 
 go 1.19
 

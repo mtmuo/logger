@@ -5,15 +5,15 @@ import "testing"
 func TestName(t *testing.T) {
 	err := New(Config{
 		WxPusher: &WxPusher{
-			ApiToken: "AT_ap9VpRWycDS73FlX4Dza8NI9e3PyxSmF",
-			TopicIds: []int{11326},
+			ApiToken: "",
+			TopicIds: []int{},
 		},
 	})
 	if err != nil {
 		t.Error(err)
 		return
 	}
-
+	// git config --global http.https://github.com.proxy socks5://127.0.0.1:10808
 	module := WithModule("TestName")
 
 	for i := 0; i < 100; i++ {
