@@ -138,20 +138,10 @@ func (t *hook) Send(subject, context string) {
 }
 
 func newHook(moduleName string) *hook {
-	h := &hook{
+	return &hook{
 		moduleName:       moduleName,
 		triggerNum:       TriggerNum,
 		rotationInterval: RotationInterval,
 		notifyInterval:   NotifyInterval,
 	}
-	return h
-}
-
-func newHooks() *hooks {
-	h := &hooks{
-		hooks: map[string]*hook{
-			"global": newHook("global"),
-		},
-	}
-	return h
 }

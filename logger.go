@@ -3,6 +3,7 @@ package logger
 import (
 	"fmt"
 	"github.com/sirupsen/logrus"
+	"runtime/debug"
 	"time"
 )
 
@@ -12,7 +13,11 @@ var (
 	NotifyInterval   = time.Minute * 30
 	notice           = NewNotice()
 	std              = logrus.New()
-	loggerHooks      = newHooks()
+	loggerHooks      = &hooks{
+		hooks: map[string]*hook{
+			"global": newHook("global"),
+		},
+	}
 )
 
 type Logger struct {
@@ -27,7 +32,7 @@ func (l *Logger) Reset() {
 func (l *Logger) Recover(fun func(err error)) {
 	if err := recover(); err != nil {
 		if fun != nil {
-			fun(fmt.Errorf("%v", err))
+			fun(fmt.Errorf("%v\n%s", err, debug.Stack()))
 		} else {
 			l.Error(err)
 		}
